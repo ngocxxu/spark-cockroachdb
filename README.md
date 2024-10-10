@@ -47,7 +47,7 @@ price: Giá bán
 quantity_sold: Số lượng bán
 ```
 
-- `product_analysis.py`
+- `user_analysis.py`
 
 ```
 from pyspark.sql import SparkSession
@@ -55,50 +55,41 @@ import pyspark.sql.functions as F
 import matplotlib.pyplot as plt
 
 # Create SparkSession
-spark = SparkSession.builder.appName("ProductAnalysis").getOrCreate()
+spark = SparkSession.builder.appName("UserAnalysis").getOrCreate()
 
-# Read data of products
-product_df = spark.read.csv("data/raw/product_data.csv", header=True, inferSchema=True)
+# Read data of users
+user_df = spark.read.csv("data/raw/user_data.csv", header=True, inferSchema=True)
 
-# Analyze top selling product
-top_products = product_df.groupBy("product_name").\
-                         agg(F.sum("quantity_sold").alias("total_sold")).\
-                         orderBy("total_sold", ascending=False).\
-                         limit(10)
-top_products.show()
+# Analyze top users by total spend
+top_spenders = user_df.groupBy("user_name").\
+                       agg(F.sum("total_spend").alias("total_spend")).\
+                       orderBy("total_spend", ascending=False).\
+                       limit(10)
+top_spenders.show()
 
-# Analyze high margin product (biên lợi nhuận)
-product_df = product_df.withColumn("profit_margin", product_df.price - product_df.cost)
-top_profit_products = product_df.orderBy("profit_margin", ascending=False).limit(10)
-top_profit_products.show()
+# Analyze user spend trends over time
+user_df = user_df.withColumn("date", F.to_date("date"))
+spend_trend = user_df.groupBy("date", "user_name").\
+                     agg(F.sum("total_spend").alias("total_spend")).\
+                     orderBy("date")
 
-# Analyze sales trends over time
-product_df = product_df.withColumn("date", F.to_date("date"))
-sales_trend = product_df.groupBy("date", "product_name").\
-                        agg(F.sum("quantity_sold").alias("total_sold")).\
-                        orderBy("date")
-
-sales_trend_pandas = sales_trend.toPandas()
+spend_trend_pandas = spend_trend.toPandas()
 plt.figure(figsize=(12, 6))
-sales_trend_pandas.plot(x="date", y="total_sold", kind="line")
-plt.title("Sales Trend by Product")
+spend_trend_pandas.plot(x="date", y="total_spend", kind="line")
+plt.title("User Spend Trend")
 plt.xlabel("Date")
-plt.ylabel("Total Sold")
+plt.ylabel("Total Spend")
 plt.show()
 
-# Save DataFrame top_products into file CSV
-top_products_df = top_products.toPandas()
-top_products_df.to_csv("visualizations/top_selling_products.csv", index=False)
+# Save DataFrame top_spenders into file CSV
+top_spenders_df = top_spenders.toPandas()
+top_spenders_df.to_csv("visualizations/top_spenders.csv", index=False)
 
-# Save DataFrame top_profit_products into file CSV
-top_profit_products_df = top_profit_products.toPandas()
-top_profit_products_df.to_csv("visualizations/high_margin_products.csv", index=False)
-
-# Save sales trend chart to image file
-plt.savefig("visualizations/sales_trend.png")
+# Save spend trend chart to image file
+plt.savefig("visualizations/spend_trend.png")
 ```
 
-- `create_product_data.py`
+- `create_user_data.py`
 
 ```
 import pandas as pd
@@ -107,27 +98,28 @@ from datetime import datetime, timedelta
 
 fake = Faker()
 
-# Create a DataFrame to store product data
-product_data = pd.DataFrame(columns=['product_id', 'product_name', 'category', 'price', 'quantity_sold', 'cost', 'date'])
+# Create a DataFrame to store user data
+user_data = pd.DataFrame(columns=['user_id', 'user_name', 'email', 'total_spend', 'date', 'age', 'gender', 'location'])
 
-# Create 100 sample products
-product_list = []
+# Create 100 sample users
+user_list = []
 start_date = datetime(2022, 1, 1)
 for i in range(100):
-    product_list.append({
-        'product_id': f'P{i:03}',
-        'product_name': fake.unique.word(),
-        'category': fake.random_element(['Electronics', 'Clothing', 'Home', 'Sports', 'Books']),
-        'price': round(fake.pyfloat(min_value=10, max_value=500, right_digits=2), 2),
-        'quantity_sold': fake.random_int(min=50, max=1000),
-        'cost': round(fake.pyfloat(min_value=5, max_value=300, right_digits=2), 2),
-        'date': start_date + timedelta(days=i)
+    user_list.append({
+        'user_id': f'U{i:03}',
+        'user_name': fake.unique.name(),
+        'email': fake.email(),
+        'total_spend': round(fake.pyfloat(min_value=50, max_value=5000, right_digits=2), 2),
+        'date': start_date + timedelta(days=i),
+        'age': fake.random_int(min=18, max=65),
+        'gender': fake.random_element(['Male', 'Female', 'Other']),
+        'location': f"{fake.city()}, {fake.country_code()}"
     })
 
-product_data = pd.concat([product_data, pd.DataFrame(product_list)], ignore_index=True)
+user_data = pd.concat([user_data, pd.DataFrame(user_list)], ignore_index=True)
 
 # Save file CSV
-product_data.to_csv('data/raw/product_data.csv', index=False)
+user_data.to_csv('data/raw/user_data.csv', index=False)
 ```
 
 - Install `pip install matplotlib`
