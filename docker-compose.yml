@@ -1,0 +1,27 @@
+version: '3.5'
+services:
+  spark-master:
+    image: apache/spark:3.5.3
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master -h spark-master
+    user: root
+    hostname: spark-master
+    environment:
+      - SPARK_CONF_DIR=/opt/spark/conf
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_MASTER_PORT=7077
+    ports:
+      - 8080:8080
+      - 7077:7077
+
+  spark-worker:
+    image: apache/spark:3.5.3
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    user: root
+    environment:
+      - SPARK_CONF_DIR=/opt/spark/conf
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=1g
+    ports:
+      - 8081:8081
+    depends_on:
+      - spark-master
