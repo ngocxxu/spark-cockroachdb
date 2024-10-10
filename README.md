@@ -123,7 +123,57 @@ user_data.to_csv('data/raw/user_data.csv', index=False)
 ```
 
 - Install `pip install matplotlib`
+
 - Install `pip install faker pandas`
+
 - Run `python3 scripts/create_product_data.py` to create 100 sample products
+
 - Run `python3 scripts/product_analysis.py` to analyze top selling product, high margin product, sales trends over time
-- ``
+
+- `notebooks/user_terminal.py`
+
+```
+import pandas as pd
+
+# Read top spenders data
+top_spenders_df = pd.read_csv("visualizations/top_spenders.csv")
+
+# Display top spenders data
+print(top_spenders_df)
+```
+
+- `notebooks/user_jupitor.py`
+
+```
+import pandas as pd
+import io
+
+# Data get from visualizations/top_spenders.csv
+data = """user_name,total_spend
+Joan Martin,4993.83
+Jesse Ellis,4966.71
+Stephen Little,4907.74
+James Chen,4906.39
+Kathryn Bailey,4882.6
+Steven Bruce,4840.3
+Eric Johnson,4748.15
+David Mcclure,4737.19
+Douglas Cox,4719.0
+Alexis Jones,4714.41"""
+
+df = pd.read_csv(io.StringIO(data), sep=',')
+display(df)
+```
+
+- Watch table data on terminal
+
+  - run `python3 ./notebooks/user_terminal.py`
+
+    ![alt text](image-4.png)
+
+- Watch table data on jupiter notebook
+
+  - Access to `localhost:8888` (after run docker) to open jupiter notebook
+  - Paste code below to create table
+
+    ![alt text](image-5.png)

@@ -25,3 +25,13 @@ services:
       - 8081:8081
     depends_on:
       - spark-master
+
+  jupyter:
+    image: jupyter/pyspark-notebook:x86_64-ubuntu-22.04
+    command: start-notebook.sh --NotebookApp.token=''
+    ports:
+      - 8888:8888
+    volumes:
+      - ./:/home/work
+    depends_on:
+      - spark-master
