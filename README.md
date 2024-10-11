@@ -18,7 +18,10 @@
 - Type `pip install pyspark` to install pyspark
   ![alt text](image-3.png)
 
+- Run `spark-submit ./spark-project/scripts/user_analysis.py` in Terminal
+
 - Run `pyspark` to start Spark Shell
+
 
 ## Additional in Spark Master - Remote VS Code
 
@@ -40,11 +43,7 @@ spark-project/
 - Relationship
 
 ```
-product_id: Mã sản phẩm
-product_name: Tên sản phẩm
-category: Danh mục sản phẩm
-price: Giá bán
-quantity_sold: Số lượng bán
+'user_id', 'user_name', 'email', 'total_spend', 'date', 'age', 'gender', 'location'
 ```
 
 - `user_analysis.py`
@@ -142,7 +141,7 @@ top_spenders_df = pd.read_csv("visualizations/top_spenders.csv")
 print(top_spenders_df)
 ```
 
-- `notebooks/user_jupitor.py`
+- `notebooks/user_jupiter.py`
 
 ```
 import pandas as pd
