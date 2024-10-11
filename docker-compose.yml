@@ -14,6 +14,8 @@ services:
       - 7077:7077
     volumes:
       - .:/spark-project
+    networks:
+      - spark-network
 
   spark-worker:
     image: apache/spark:3.5.3
@@ -29,6 +31,8 @@ services:
       - spark-master
     volumes:
       - .:/spark-project
+    networks:
+      - spark-network
 
   jupyter:
     image: jupyter/pyspark-notebook:x86_64-ubuntu-22.04
@@ -40,3 +44,9 @@ services:
     depends_on:
       - spark-master
       - spark-worker
+    networks:
+      - spark-network
+
+networks:
+  spark-network:
+    name: spark-network

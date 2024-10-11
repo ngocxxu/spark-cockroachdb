@@ -177,3 +177,22 @@ display(df)
   - Paste code below to create table
 
     ![alt text](image-5.png)
+
+## Setup WSL
+
+- Open powercell admin run `wsl --install`
+
+## Setup environment Java
+
+- Run `sudo apt update`
+- Run `sudo apt install openjdk-11-jdk`
+
+## Setup Apache Spark
+
+- Run `pip install pyspark matplotlib faker pandas`
+
+## Clone repository github into WSL
+
+- Run `git clone && cd spark-project`
+- Open source code by VS Code
+- Open terminal and run `pyspark`

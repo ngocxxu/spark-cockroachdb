@@ -3,7 +3,7 @@ import pyspark.sql.functions as F
 import matplotlib.pyplot as plt
 
 # Create SparkSession
-spark = SparkSession.builder.appName("UserAnalysis").master("spark://spark-master:7077").getOrCreate()
+spark = SparkSession.builder.appName("UserAnalysis").master("local[*]").getOrCreate()
 
 # Read data of users
 user_df = spark.read.csv("data/raw/user_data.csv", header=True, inferSchema=True)
