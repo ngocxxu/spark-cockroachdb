@@ -15,13 +15,17 @@
 
 - After complete `Access to Spark Master` step, press [Ctrl + `] to open terminal
 
-- Type `pip install pyspark` to install pyspark
-  ![alt text](image-3.png)
+- Create and access folder `mkdir spark-project && cd spark-project`
+
+- Copy and paste all from `spark-project` local github into folder `spark-project` remote
+
+- Install `pip install pyspark matplotlib faker pandas`
+
+<!-- - Type `pip install pyspark` to install pyspark
 
 - Run `spark-submit ./spark-project/scripts/user_analysis.py` in Terminal
 
-- Run `pyspark` to start Spark Shell
-
+- Run `pyspark` to start Spark Shell -->
 
 ## Additional in Spark Master - Remote VS Code
 
@@ -34,7 +38,7 @@ spark-project/
 │   └── processed/
 ├── notebooks/
 ├── scripts/
-│   ├── product_analysis.py
+│   ├── user_analysis.py
 │   └── utils.py
 ├── visualizations/
 
@@ -121,13 +125,9 @@ user_data = pd.concat([user_data, pd.DataFrame(user_list)], ignore_index=True)
 user_data.to_csv('data/raw/user_data.csv', index=False)
 ```
 
-- Install `pip install matplotlib`
+- Run `python3 scripts/create_user_data.py` to create 100 sample users
 
-- Install `pip install faker pandas`
-
-- Run `python3 scripts/create_product_data.py` to create 100 sample products
-
-- Run `python3 scripts/product_analysis.py` to analyze top selling product, high margin product, sales trends over time
+- Run `python3 scripts/user_analysis.py` to analyze
 
 - `notebooks/user_terminal.py`
 
