@@ -13,32 +13,39 @@
 ## Setup environment Java
 
 - Run `sudo apt update`
-- Run `sudo apt install openjdk-11-jdk`
 
-## Setup Python
-
-- Run `sudo apt install python3`
-- Run `sudo apt install python3-pip`
-
-## Setup Apache Spark
-
-- Run `pip3 install pyspark matplotlib faker pandas`
+- Run `sudo apt install openjdk-11-jdk` for Window
 
 ## Clone repository github into WSL
 
 - Open WSL terminal and run `cd /home/[username]`
+
 - Access and clone `https://github.com/ngocxxu/spark-cockroachdb`
 
-## Setup VS Code
-
 - Open source code by VS Code
+
 - Press [Ctrl + `] to open terminal
+
+## Setup Apache Spark
+
+- Run `sudo apt install python3` (if you don't have python3)
+
+- Run `sudo apt install pipenv` (if you don't have pipenv)
+
+- Run `pipenv install`
+
+- Run `pipenv install setuptools` (if error)
 
 ## Run Spark
 
-- Run `spark-submit ./scripts/create_user_data.py`
-- Run `spark-submit ./scripts/user_analysis.py`
+- Run `pipenv run spark-submit ./scripts/create_user_data.py`
 
-# Additional with Jupiter Notebook
+- Run `pipenv run spark-submit ./scripts/user_analysis.py`
+
+# Additional with Jupiter Notebook - You can skip this step
 
 ## Setup docker
+
+- Download docker desktop from [here](https://www.docker.com/products/docker-desktop/) and open it
+
+- Run `docker-compose up -d` in your project if you want to open Jupiter Notebook at `http://localhost:8888`

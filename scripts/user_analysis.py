@@ -1,5 +1,7 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 # Create SparkSession
