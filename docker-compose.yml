@@ -36,7 +36,7 @@ services:
     ports:
       - 8888:8888
     volumes:
-      - .:/jupyter
+      - .:/spark-project
     depends_on:
       - spark-master
       - spark-worker

@@ -15,10 +15,10 @@
 
 - After complete `Access to Spark Master` step, press [Ctrl + `] to open terminal
 
-- Create and access folder `mkdir spark-project && cd spark-project`
+<!-- - Create and access folder `mkdir spark-project && cd spark-project`
 
 - Copy and paste all from `spark-project` local github into folder `spark-project` remote
-  ![alt text](image-6.png)
+  ![alt text](image-6.png) -->
 
 - Install `pip install pyspark matplotlib faker pandas`
 
@@ -30,7 +30,7 @@
 
 ## Additional in Spark Master - Remote VS Code
 
-- Create a structure folder
+<!-- - Create a structure folder
 
 ```
 spark-project/
@@ -40,10 +40,10 @@ spark-project/
 ├── notebooks/
 ├── scripts/
 │   ├── user_analysis.py
-│   └── utils.py
+│   └── create_user_data.py
 ├── visualizations/
 
-```
+``` -->
 
 - Relationship
 
