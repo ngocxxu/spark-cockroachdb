@@ -18,6 +18,7 @@
 - Create and access folder `mkdir spark-project && cd spark-project`
 
 - Copy and paste all from `spark-project` local github into folder `spark-project` remote
+  ![alt text](image-6.png)
 
 - Install `pip install pyspark matplotlib faker pandas`
 
@@ -52,7 +53,7 @@ spark-project/
 
 - `user_analysis.py`
 
-```
+```python
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 import matplotlib.pyplot as plt
@@ -94,7 +95,7 @@ plt.savefig("visualizations/spend_trend.png")
 
 - `create_user_data.py`
 
-```
+```python
 import pandas as pd
 from faker import Faker
 from datetime import datetime, timedelta
@@ -131,7 +132,7 @@ user_data.to_csv('data/raw/user_data.csv', index=False)
 
 - `notebooks/user_terminal.py`
 
-```
+```python
 import pandas as pd
 
 # Read top spenders data
@@ -143,7 +144,7 @@ print(top_spenders_df)
 
 - `notebooks/user_jupiter.py`
 
-```
+```python
 import pandas as pd
 import io
 
