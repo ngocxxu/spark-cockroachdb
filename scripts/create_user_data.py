@@ -1,5 +1,5 @@
-import pandas as pd
-from faker import Faker
+import pandas as pd # type: ignore
+from faker import Faker # type: ignore
 from datetime import datetime, timedelta
 
 fake = Faker()

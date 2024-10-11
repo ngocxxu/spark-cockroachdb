@@ -1,8 +1,8 @@
-from pyspark.sql import SparkSession
-import pyspark.sql.functions as F
-import matplotlib
+from pyspark.sql import SparkSession # type: ignore
+import pyspark.sql.functions as F # type: ignore
+import matplotlib # type: ignore
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # type: ignore
 
 # Create SparkSession
 spark = SparkSession.builder.appName("UserAnalysis").master("local[*]").getOrCreate()
