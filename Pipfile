@@ -9,7 +9,7 @@ matplotlib = "*"
 faker = "*"
 pandas = "*"
 setuptools = "*"
-python-dotenv = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 

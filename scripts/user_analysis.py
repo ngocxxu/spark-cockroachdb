@@ -1,6 +1,6 @@
-from pyspark.sql import SparkSession # type: ignore
-import pyspark.sql.functions as F # type: ignore
-import matplotlib.pyplot as plt # type: ignore
+from pyspark.sql import SparkSession
+import pyspark.sql.functions as F
+import matplotlib.pyplot as plt
 
 # Create SparkSession
 spark = SparkSession.builder.appName("UserAnalysis").master("local[*]").getOrCreate()

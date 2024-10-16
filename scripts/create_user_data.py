@@ -1,6 +1,8 @@
-import pandas as pd # type: ignore
-from faker import Faker # type: ignore
+import pandas as pd
+from faker import Faker
 from datetime import datetime, timedelta
+from sqlalchemy import create_engine
+import os
 
 fake = Faker()
 
@@ -24,5 +26,12 @@ for i in range(100):
 
 user_data = pd.concat([user_data, pd.DataFrame(user_list)], ignore_index=True)
 
-# Save file CSV
-user_data.to_csv('data/raw/user_data.csv', index=False)
+# CockroachDB connection string
+db_url = os.getenv("DATABASE_URL")
+
+try:
+    engine = create_engine(db_url)
+    user_data.to_sql('user_data', engine, if_exists='replace', index=False)
+    print("Data successfully saved to CockroachDB")
+except Exception as e:
+    print(f"An error occurred while saving data: {e}")

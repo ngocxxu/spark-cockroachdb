@@ -32,9 +32,9 @@
 
 - Run `sudo apt install pipenv` (if you don't have pipenv)
 
-- Run `pipenv install`
+- Run virtual environment `pipenv shell`
 
-- Run `pipenv install setuptools` (if error)
+- Run `pipenv install`
 
 ## Create ENV file
 
@@ -59,3 +59,5 @@
 - Download docker desktop from [here](https://www.docker.com/products/docker-desktop/) and open it
 
 - Run `docker-compose up -d` in your project if you want to open Jupiter Notebook at `http://localhost:8888`
+
+`docker exec -it local_crdb cockroach sql --insecure -e "CREATE DATABASE IF NOT EXISTS spark_cockroach_db;"`
