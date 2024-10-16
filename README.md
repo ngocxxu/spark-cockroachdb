@@ -44,9 +44,9 @@
 
 ## Run Spark
 
-- Run `pipenv run spark-submit ./scripts/create_user_data.py`
+- Run `pipenv run python3 ./scripts/create_user_data.py`
 
-- Run `pipenv run spark-submit --master 'local[*]' --conf spark.ui.port=4043 ./scripts/user_analysis.py`
+- Run `pipenv run python3 ./scripts/user_analysis.py`
 
 - Access `http://localhost:4043` to see the result
 
