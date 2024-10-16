@@ -9,6 +9,7 @@ matplotlib = "*"
 faker = "*"
 pandas = "*"
 setuptools = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
