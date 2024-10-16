@@ -1,8 +1,8 @@
+import os
 import pandas as pd
 from faker import Faker
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine
-import os
 
 fake = Faker()
 
