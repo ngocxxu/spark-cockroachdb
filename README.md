@@ -36,6 +36,12 @@
 
 - Run `pipenv install setuptools` (if error)
 
+## Create ENV file
+
+- Run `touch .env`
+
+- Copy and paste into `.env` file
+
 ## Run Spark
 
 - Run `pipenv run spark-submit ./scripts/create_user_data.py`
