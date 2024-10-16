@@ -9,7 +9,9 @@ matplotlib = "*"
 faker = "*"
 pandas = "*"
 setuptools = "*"
-sqlalchemy = "*"
+sqlalchemy = "==2.0.36"
+psycopg2-binary = "*"
+sqlalchemy-cockroachdb = "*"
 
 [dev-packages]
 

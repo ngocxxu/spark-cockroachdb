@@ -42,6 +42,20 @@
 
 - Copy and paste into `.env` file
 
+## Setup Certificate of CockroachDB in terminal
+
+### Windows
+
+```
+mkdir -p $env:appdata\postgresql\; Invoke-WebRequest -Uri https://cockroachlabs.cloud/clusters/3a5b3a87-d1a5-4d07-8c27-a2525a220a6c/cert -OutFile $env:appdata\postgresql\root.crt
+```
+
+### Linux / WSL / Mac
+
+```
+curl --create-dirs -o $HOME/.postgresql/root.crt 'https://cockroachlabs.cloud/clusters/3a5b3a87-d1a5-4d07-8c27-a2525a220a6c/cert'
+```
+
 ## Run Spark
 
 - Run `pipenv run python3 ./scripts/create_user_data.py`

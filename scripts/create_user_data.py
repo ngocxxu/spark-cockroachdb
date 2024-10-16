@@ -24,7 +24,8 @@ for i in range(100):
         'location': f"{fake.city()}, {fake.country_code()}"
     })
 
-user_data = pd.concat([user_data, pd.DataFrame(user_list)], ignore_index=True)
+if user_list.__len__() > 0:
+    user_data = pd.concat([user_data, pd.DataFrame(user_list)], ignore_index=True)
 
 # CockroachDB connection string
 db_url = os.getenv("DATABASE_URL")
