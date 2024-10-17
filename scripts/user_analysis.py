@@ -7,16 +7,17 @@ import os
 spark = SparkSession.builder \
     .appName("UserAnalysis") \
     .master("local[*]") \
-    .config("spark.jars", "/postgresql-42.7.4.jar") \
+    .config("spark.jars", "./postgresql-42.7.4.jar") \
     .getOrCreate()
 
 # CockroachDB connection string
 db_url = os.getenv("DATABASE_URL")
+jdbc_db_url = os.getenv("JDBC_DATABASE_URL")
 
 # Read CockroachDB
 user_df = spark.read \
     .format("jdbc") \
-    .option("url", db_url) \
+    .option("url", jdbc_db_url) \
     .option("dbtable", "user_data") \
     .option("user", "ngocxxu") \
     .option("password", os.getenv("COCKROACH_PASSWORD")) \
@@ -47,12 +48,14 @@ plt.show()
 
 try:
     engine = create_engine(db_url)
-    
-    # Plot spend trend
     top_spenders_df = top_spenders.toPandas()
-    top_spenders_df.to_sql("top_spenders", con=engine, if_exists="replace", index=False)
+    
+    # Save DataFrame top_spenders into file CSV
+    top_spenders_df.to_csv("visualizations/top_spenders.csv", index=False)
+    plt.savefig("visualizations/spend_trend.png")
 
     # Save results to CockroachDB
+    top_spenders_df.to_sql("top_spenders", con=engine, if_exists="replace", index=False)
     spend_trend_pandas.to_sql("spend_trend", con=engine, if_exists="replace", index=False)
 
     print("Data successfully saved to CockroachDB")
