@@ -1,9 +1,45 @@
-version: '3.5'
+version: '3.8'
+
 services:
-  jupyter:
-    image: jupyter/pyspark-notebook:x86_64-ubuntu-22.04
-    command: start-notebook.sh --NotebookApp.token=''
+  roach1:
+    image: cockroachdb/cockroach:v22.2.0
+    command: start --insecure --join=roach1,roach2,roach3
     ports:
-      - 8888:8888
+      - '26257:26257'
+      - '8080:8080'
     volumes:
-      - .:/spark-project
+      - roach1:/cockroach/cockroach-data
+
+  roach2:
+    image: cockroachdb/cockroach:v22.2.0
+    command: start --insecure --join=roach1,roach2,roach3
+    volumes:
+      - roach2:/cockroach/cockroach-data
+
+  roach3:
+    image: cockroachdb/cockroach:v22.2.0
+    command: start --insecure --join=roach1,roach2,roach3
+    volumes:
+      - roach3:/cockroach/cockroach-data
+
+  roach-init:
+    image: cockroachdb/cockroach:v22.2.0
+    command: init --insecure --host=roach1
+    depends_on:
+      - roach1
+      - roach2
+      - roach3
+
+volumes:
+  roach1:
+  roach2:
+  roach3:
+# version: '3.5'
+# services:
+#   jupyter:
+#     image: jupyter/pyspark-notebook:x86_64-ubuntu-22.04
+#     command: start-notebook.sh --NotebookApp.token=''
+#     ports:
+#       - 8888:8888
+#     volumes:
+#       - .:/spark-project

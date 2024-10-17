@@ -73,3 +73,25 @@ curl --create-dirs -o $HOME/.postgresql/root.crt 'https://cockroachlabs.cloud/cl
 - Run `docker-compose up -d` in your project if you want to open Jupiter Notebook at `http://localhost:8888`
 
 `docker exec -it local_crdb cockroach sql --insecure -e "CREATE DATABASE IF NOT EXISTS spark_cockroach_db;"`
+
+# CockroachDB on Host
+
+## Setup
+
+### Linux / WSL / Mac
+
+- Run `wget https://binaries.cockroachdb.com/cockroach-v23.2.0.linux-amd64.tgz`
+
+- Extract `tar -xvzf cockroach-v23.2.0.linux-amd64.tgz`
+
+- Run `sudo cp cockroach-v23.2.0.linux-amd64/cockroach /usr/local/bin/`
+
+- Run `sudo chmod +x /usr/local/bin/cockroach`
+
+- Check version `cockroach version`
+
+## Create Cluster
+
+## Create Node
+
+## Interative with CockroachDB Admin UI
