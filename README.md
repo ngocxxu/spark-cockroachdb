@@ -62,11 +62,9 @@ curl --create-dirs -o $HOME/.postgresql/root.crt 'https://cockroachlabs.cloud/cl
 
 - Run `pipenv run python3 ./scripts/user_analysis.py`
 
-- Access `http://localhost:4043` to see the result
-
 ## Run CockroachDB
 
-# Additional with Jupiter Notebook - You can skip this step
+# Optional with Jupiter Notebook - You can skip this step
 
 ## Setup docker
 
