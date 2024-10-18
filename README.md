@@ -90,8 +90,14 @@ curl --create-dirs -o $HOME/.postgresql/root.crt 'https://cockroachlabs.cloud/cl
 
 - Check version `cockroach version`
 
-## Create Cluster
+## Create Database in CockroachDB
 
-## Create Node
+```
+docker exec -it cockroach1 ./cockroach sql --insecure --host=cockroach1:26257
+
+CREATE DATABASE spark_cockroach_db;
+
+SHOW DATABASES;
+```
 
 ## Interative with CockroachDB Admin UI

@@ -11,16 +11,16 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # CockroachDB connection string
-db_url = os.getenv("DATABASE_URL")
-jdbc_db_url = os.getenv("JDBC_DATABASE_URL")
+db_url = os.getenv("DATABASE_URL_LOCAL")
+jdbc_db_url = os.getenv("JDBC_DATABASE_URL_LOCAL")
 
 # Read CockroachDB
 user_df = spark.read \
     .format("jdbc") \
     .option("url", jdbc_db_url) \
     .option("dbtable", "user_data") \
-    .option("user", "ngocxxu") \
-    .option("password", os.getenv("COCKROACH_PASSWORD")) \
+    .option("user", "root") \
+    .option("password", "") \
     .option("driver", "org.postgresql.Driver") \
     .load()
 
