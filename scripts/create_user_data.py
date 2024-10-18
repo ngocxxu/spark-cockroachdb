@@ -12,7 +12,7 @@ user_data = pd.DataFrame(columns=['user_id', 'user_name', 'email', 'total_spend'
 # Create 100 sample users
 user_list = []
 start_date = datetime(2022, 1, 1)
-for i in range(100):
+for i in range(400000):
     user_list.append({
         'user_id': f'U{i:03}',
         'user_name': fake.unique.name(),
@@ -23,6 +23,7 @@ for i in range(100):
         'gender': fake.random_element(['Male', 'Female', 'Other']),
         'location': f"{fake.city()}, {fake.country_code()}"
     })
+
 
 if user_list.__len__() > 0:
     user_data = pd.concat([user_data, pd.DataFrame(user_list)], ignore_index=True)
