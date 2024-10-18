@@ -9,7 +9,7 @@ fake = Faker()
 # Create a DataFrame to store user data
 user_data = pd.DataFrame(columns=['user_id', 'user_name', 'email', 'total_spend', 'date', 'age', 'gender', 'location'])
 
-# Create 100 sample users
+# Create 400000 sample users
 user_list = []
 start_date = datetime(2022, 1, 1)
 for i in range(400000):
