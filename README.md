@@ -40,7 +40,7 @@
 
 - Run `touch .env`
 
-- Copy and paste into `.env` file
+- Copy `.env.example` and paste into `.env` file
 
 ## Run Analystics
 
