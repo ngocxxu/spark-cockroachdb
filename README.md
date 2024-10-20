@@ -36,12 +36,6 @@
 
 - Run `pipenv install`
 
-## Create ENV file
-
-- Run `touch .env`
-
-- Copy and paste into `.env` file
-
 ## Run Analystics
 
 - Run `pipenv run python3 ./scripts/create_user_data.py`
@@ -60,7 +54,18 @@
 
 `docker exec -it local_crdb cockroach sql --insecure -e "CREATE DATABASE IF NOT EXISTS spark_cockroach_db;"`
 
-# CockroachDB on Host
+## Create Database in CockroachDB
+
+```
+docker exec -it cockroach1 ./cockroach sql --insecure --host=cockroach1:26257
+
+CREATE DATABASE spark_cockroach_db;
+
+USE spark_cockroach_db;
+
+```
+
+# CockroachDB on Host (Optional)
 
 ## Setup
 
@@ -75,16 +80,3 @@
 - Run `sudo chmod +x /usr/local/bin/cockroach`
 
 - Check version `cockroach version`
-
-## Create Database in CockroachDB
-
-```
-docker exec -it cockroach1 ./cockroach sql --insecure --host=cockroach1:26257
-
-CREATE DATABASE spark_cockroach_db;
-
-USE spark_cockroach_db;
-
-```
-
-## Interative with CockroachDB Admin UI

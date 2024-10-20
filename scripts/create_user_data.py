@@ -29,7 +29,7 @@ if user_list.__len__() > 0:
     user_data = pd.concat([user_data, pd.DataFrame(user_list)], ignore_index=True)
 
 # CockroachDB connection string
-db_url = os.getenv("DATABASE_URL_LOCAL")
+db_url = os.getenv("cockroachdb+psycopg2://root:@localhost:26257/spark_cockroach_db?sslmode=disable&connect_timeout=10")
 
 try:
     engine = create_engine(db_url)
