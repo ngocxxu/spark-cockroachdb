@@ -12,7 +12,7 @@ user_data = pd.DataFrame(columns=['user_id', 'user_name', 'email', 'total_spend'
 # Create 400000 sample users
 user_list = []
 start_date = datetime(2022, 1, 1)
-for i in range(100):
+for i in range(400000):
     user_list.append({
         'user_id': f'U{i:03}',
         'user_name': fake.unique.name(),
