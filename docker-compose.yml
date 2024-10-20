@@ -34,10 +34,10 @@ services:
       - roach2
       - roach3
 
-# volumes:
-#   roach1:
-#   roach2:
-#   roach3:
+volumes:
+  roach1:
+  roach2:
+  roach3:
 # version: '3.5'
 # services:
 #   jupyter:
@@ -47,9 +47,6 @@ services:
 #       - 8888:8888
 #     volumes:
 #       - .:/spark-project
-
-
-
 
 # version: '3.8'
 
