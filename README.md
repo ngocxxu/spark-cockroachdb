@@ -26,7 +26,7 @@
 
 - Press [Ctrl + `] to open terminal
 
-## Setup Apache Spark
+## Setup Python Environment
 
 - Run `sudo apt install python3` (if you don't have python3)
 
@@ -42,21 +42,7 @@
 
 - Copy and paste into `.env` file
 
-## Setup Certificate of CockroachDB in terminal
-
-### Windows
-
-```
-mkdir -p $env:appdata\postgresql\; Invoke-WebRequest -Uri https://cockroachlabs.cloud/clusters/3a5b3a87-d1a5-4d07-8c27-a2525a220a6c/cert -OutFile $env:appdata\postgresql\root.crt
-```
-
-### Linux / WSL / Mac
-
-```
-curl --create-dirs -o $HOME/.postgresql/root.crt 'https://cockroachlabs.cloud/clusters/3a5b3a87-d1a5-4d07-8c27-a2525a220a6c/cert'
-```
-
-## Run Spark
+## Run Analystics
 
 - Run `pipenv run python3 ./scripts/create_user_data.py`
 
@@ -73,3 +59,30 @@ curl --create-dirs -o $HOME/.postgresql/root.crt 'https://cockroachlabs.cloud/cl
 - Run `docker-compose up -d` in your project if you want to open Jupiter Notebook at `http://localhost:8888`
 
 `docker exec -it local_crdb cockroach sql --insecure -e "CREATE DATABASE IF NOT EXISTS spark_cockroach_db;"`
+
+## Create Database in CockroachDB
+
+```
+docker exec -it cockroach1 ./cockroach sql --insecure --host=cockroach1:26257
+
+CREATE DATABASE spark_cockroach_db;
+
+USE spark_cockroach_db;
+
+```
+
+# CockroachDB on Host (Optional)
+
+## Setup
+
+### Linux / WSL / Mac
+
+- Run `wget https://binaries.cockroachdb.com/cockroach-v23.2.0.linux-amd64.tgz`
+
+- Extract `tar -xvzf cockroach-v23.2.0.linux-amd64.tgz`
+
+- Run `sudo cp cockroach-v23.2.0.linux-amd64/cockroach /usr/local/bin/`
+
+- Run `sudo chmod +x /usr/local/bin/cockroach`
+
+- Check version `cockroach version`
