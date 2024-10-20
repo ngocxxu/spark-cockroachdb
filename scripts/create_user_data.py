@@ -12,7 +12,7 @@ user_data = pd.DataFrame(columns=['user_id', 'user_name', 'email', 'total_spend'
 # Create 400000 sample users
 user_list = []
 start_date = datetime(2022, 1, 1)
-for i in range(400000):
+for i in range(100):
     user_list.append({
         'user_id': f'U{i:03}',
         'user_name': fake.unique.name(),
@@ -29,7 +29,7 @@ if user_list.__len__() > 0:
     user_data = pd.concat([user_data, pd.DataFrame(user_list)], ignore_index=True)
 
 # CockroachDB connection string
-db_url = os.getenv("cockroachdb+psycopg2://root:@localhost:26257/spark_cockroach_db?sslmode=disable&connect_timeout=10")
+db_url = os.getenv("DATABASE_URL_LOCAL")
 
 try:
     engine = create_engine(db_url)

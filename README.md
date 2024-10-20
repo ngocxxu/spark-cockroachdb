@@ -36,6 +36,12 @@
 
 - Run `pipenv install`
 
+## Create ENV file
+
+- Run `touch .env`
+
+- Copy and paste into `.env` file
+
 ## Run Analystics
 
 - Run `pipenv run python3 ./scripts/create_user_data.py`

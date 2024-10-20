@@ -13,8 +13,8 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # CockroachDB connection string
-db_url = os.getenv("cockroachdb+psycopg2://root:@localhost:26257/spark_cockroach_db?sslmode=disable&connect_timeout=10")
-jdbc_db_url = os.getenv("JDBC_cockroachdb+psycopg2://root:@localhost:26257/spark_cockroach_db?sslmode=disable&connect_timeout=10")
+db_url = os.getenv("DATABASE_URL_LOCAL")
+jdbc_db_url = os.getenv("JDBC_DATABASE_URL_LOCAL")
 
 
 # Read data from CockroachDB
