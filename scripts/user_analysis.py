@@ -16,6 +16,7 @@ spark = SparkSession.builder \
 db_url = os.getenv("DATABASE_URL_LOCAL")
 jdbc_db_url = os.getenv("JDBC_DATABASE_URL_LOCAL")
 
+
 # Read data from CockroachDB
 user_df = spark.read \
     .format("jdbc") \
@@ -25,6 +26,25 @@ user_df = spark.read \
     .option("password", "") \
     .option("driver", "org.postgresql.Driver") \
     .load()
+    
+
+# Measure read data with 3/6 nodes
+# # Start time
+# start_time = time.time()
+# # Read data from CockroachDB
+# user_df = spark.read \
+#     .format("jdbc") \
+#     .option("url", jdbc_db_url) \
+#     .option("dbtable", "user_data") \
+#     .option("user", "root") \
+#     .option("password", "") \
+#     .option("driver", "org.postgresql.Driver") \
+#     .load()
+# # End time
+# end_time = time.time()
+# elapsed_time = end_time - start_time
+# print(f"Data read from CockroachDB in {elapsed_time:.2f} seconds with 6 nodes")
+
 
 # Analyze top spenders
 top_spenders = user_df.groupBy("user_name") \

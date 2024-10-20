@@ -37,3 +37,16 @@ try:
     print("Data successfully saved to CockroachDB")
 except Exception as e:
     print(f"An error occurred while saving data: {e}")
+
+# Measure time is wrtten into cockroachdb with 3/6 nodes
+# try:
+#     engine = create_engine(db_url)
+#     # Start time
+#     start_time = time.time()
+#     user_data.to_sql('user_data', engine, if_exists='replace', index=False)
+#     # End time
+#     end_time = time.time()
+#     elapsed_time = end_time - start_time
+#     print(f"Data successfully saved to CockroachDB in {elapsed_time:.2f} seconds with 6 nodes")
+# except Exception as e:
+#     print(f"An error occurred while saving data: {e}")
