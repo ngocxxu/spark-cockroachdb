@@ -1,117 +1,16 @@
 version: '3.8'
 
 services:
-  roach1:
-    container_name: cockroach1
-    image: cockroachdb/cockroach:v22.2.0
-    command: start --insecure --join=roach1,roach2,roach3
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: spark_cockroach_db          
     ports:
-      - '26257:26257'
-      - '8080:8080'
+      - '3306:3306'                        
     volumes:
-      - roach1:/cockroach/cockroach-data
-
-  roach2:
-    container_name: cockroach2
-    image: cockroachdb/cockroach:v22.2.0
-    command: start --insecure --join=roach1,roach2,roach3
-    volumes:
-      - roach2:/cockroach/cockroach-data
-
-  roach3:
-    container_name: cockroach3
-    image: cockroachdb/cockroach:v22.2.0
-    command: start --insecure --join=roach1,roach2,roach3
-    volumes:
-      - roach3:/cockroach/cockroach-data
-
-  roach-init:
-    container_name: cockroach-init
-    image: cockroachdb/cockroach:v22.2.0
-    command: init --insecure --host=roach1
-    depends_on:
-      - roach1
-      - roach2
-      - roach3
+      - mysql_data:/var/lib/mysql         
 
 volumes:
-  roach1:
-  roach2:
-  roach3:
-# version: '3.5'
-# services:
-#   jupyter:
-#     image: jupyter/pyspark-notebook:x86_64-ubuntu-22.04
-#     command: start-notebook.sh --NotebookApp.token=''
-#     ports:
-#       - 8888:8888
-#     volumes:
-#       - .:/spark-project
-
-# version: '3.8'
-
-# services:
-#   roach1:
-#     container_name: cockroach1
-#     image: cockroachdb/cockroach:v22.2.0
-#     command: start --insecure --join=roach1,roach2,roach3,roach4,roach5,roach6
-#     ports:
-#       - '26257:26257'
-#       - '8080:8080'
-#     volumes:
-#       - roach1:/cockroach/cockroach-data
-
-#   roach2:
-#     container_name: cockroach2
-#     image: cockroachdb/cockroach:v22.2.0
-#     command: start --insecure --join=roach1,roach2,roach3,roach4,roach5,roach6
-#     volumes:
-#       - roach2:/cockroach/cockroach-data
-
-#   roach3:
-#     container_name: cockroach3
-#     image: cockroachdb/cockroach:v22.2.0
-#     command: start --insecure --join=roach1,roach2,roach3,roach4,roach5,roach6
-#     volumes:
-#       - roach3:/cockroach/cockroach-data
-
-#   roach4:
-#     container_name: cockroach4
-#     image: cockroachdb/cockroach:v22.2.0
-#     command: start --insecure --join=roach1,roach2,roach3,roach4,roach5,roach6
-#     volumes:
-#       - roach4:/cockroach/cockroach-data
-
-#   roach5:
-#     container_name: cockroach5
-#     image: cockroachdb/cockroach:v22.2.0
-#     command: start --insecure --join=roach1,roach2,roach3,roach4,roach5,roach6
-#     volumes:
-#       - roach5:/cockroach/cockroach-data
-
-#   roach6:
-#     container_name: cockroach6
-#     image: cockroachdb/cockroach:v22.2.0
-#     command: start --insecure --join=roach1,roach2,roach3,roach4,roach5,roach6
-#     volumes:
-#       - roach6:/cockroach/cockroach-data
-
-#   roach-init:
-#     container_name: cockroach-init
-#     image: cockroachdb/cockroach:v22.2.0
-#     command: init --insecure --host=roach1
-#     depends_on:
-#       - roach1
-#       - roach2
-#       - roach3
-#       - roach4
-#       - roach5
-#       - roach6
-
-# volumes:
-#   roach1:
-#   roach2:
-#   roach3:
-#   roach4:
-#   roach5:
-#   roach6:
+  mysql_data:

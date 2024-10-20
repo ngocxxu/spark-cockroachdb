@@ -13,8 +13,8 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # CockroachDB connection string
-db_url = os.getenv("DATABASE_URL_LOCAL")
-jdbc_db_url = os.getenv("JDBC_DATABASE_URL_LOCAL")
+db_url = os.getenv("DATABASE_URL_LOCAL_MYSQL")
+jdbc_db_url = os.getenv("JDBC_DATABASE_URL_LOCAL_MYSQL")
 
 
 # Read data from CockroachDB
