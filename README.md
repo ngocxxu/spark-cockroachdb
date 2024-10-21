@@ -48,8 +48,6 @@
 
 - Run `pipenv run python3 ./scripts/user_analysis.py`
 
-## Run CockroachDB
-
 # Optional with Jupiter Notebook - You can skip this step
 
 ## Setup docker
