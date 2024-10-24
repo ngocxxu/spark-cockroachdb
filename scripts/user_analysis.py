@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
 import os
 import pandas as pd
+import time
 
 # Initialize Spark session
 spark = SparkSession.builder \
@@ -18,20 +19,6 @@ jdbc_db_url = os.getenv("JDBC_DATABASE_URL_LOCAL_MYSQL")
 
 
 # Read data from CockroachDB
-user_df = spark.read \
-    .format("jdbc") \
-    .option("url", jdbc_db_url) \
-    .option("dbtable", "user_data") \
-    .option("user", "root") \
-    .option("password", "") \
-    .option("driver", "org.postgresql.Driver") \
-    .load()
-    
-
-# Measure read data with 3/6 nodes
-# # Start time
-# start_time = time.time()
-# # Read data from CockroachDB
 # user_df = spark.read \
 #     .format("jdbc") \
 #     .option("url", jdbc_db_url) \
@@ -40,10 +27,24 @@ user_df = spark.read \
 #     .option("password", "") \
 #     .option("driver", "org.postgresql.Driver") \
 #     .load()
-# # End time
-# end_time = time.time()
-# elapsed_time = end_time - start_time
-# print(f"Data read from CockroachDB in {elapsed_time:.2f} seconds with 6 nodes")
+    
+
+# Measure read data with mysql
+# Start time
+start_time = time.time()
+# Read data from CockroachDB
+user_df = spark.read \
+    .format("jdbc") \
+    .option("url", jdbc_db_url) \
+    .option("dbtable", "user_data") \
+    .option("user", "root") \
+    .option("password", "") \
+    .option("driver", "org.postgresql.Driver") \
+    .load()
+# End time
+end_time = time.time()
+elapsed_time = end_time - start_time
+print(f"Data read from MySQL in {elapsed_time:.2f} seconds")
 
 
 # Analyze top spenders
