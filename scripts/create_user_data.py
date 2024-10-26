@@ -3,6 +3,7 @@ import pandas as pd
 from faker import Faker
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine
+import time
 
 fake = Faker()
 
@@ -31,22 +32,22 @@ if user_list.__len__() > 0:
 # CockroachDB connection string
 db_url = os.getenv("DATABASE_URL_LOCAL")
 
-try:
-    engine = create_engine(db_url)
-    user_data.to_sql('user_data', engine, if_exists='replace', index=False)
-    print("Data successfully saved to CockroachDB")
-except Exception as e:
-    print(f"An error occurred while saving data: {e}")
-
-# Measure time is wrtten into cockroachdb with 3/6 nodes
 # try:
 #     engine = create_engine(db_url)
-#     # Start time
-#     start_time = time.time()
 #     user_data.to_sql('user_data', engine, if_exists='replace', index=False)
-#     # End time
-#     end_time = time.time()
-#     elapsed_time = end_time - start_time
-#     print(f"Data successfully saved to CockroachDB in {elapsed_time:.2f} seconds with 6 nodes")
+#     print("Data successfully saved to CockroachDB")
 # except Exception as e:
 #     print(f"An error occurred while saving data: {e}")
+
+# Measure time is wrtten into cockroachdb with 3/6 nodes
+try:
+    engine = create_engine(db_url)
+    # Start time
+    start_time = time.time()
+    user_data.to_sql('user_data', engine, if_exists='replace', index=False)
+    # End time
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Data successfully saved to CockroachDB in {elapsed_time:.2f} seconds with 3 nodes")
+except Exception as e:
+    print(f"An error occurred while saving data: {e}")
